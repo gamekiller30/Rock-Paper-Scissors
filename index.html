@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Main</title>
+
+  <!-- font awesome cdn link  -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+  <!-- custom css file link  -->
+  <link rel="stylesheet" href="index.css">
+
+
+
+</head>
+
+<body>
+ 
+
+<button value="Rock">Rock</button>
+<button value="Paper">Paper</button>
+<button value="Scissor">Scissor</button>
+
+<div>Player Count: <span class="pc"></span></div>
+<div>Compurer Count: <span class="cc"></span></div>
+<div class="result"><span class="rst"></span></div>
+
+<script>
+
+let buttons = document.querySelectorAll('button');
+let playerCount = document.querySelector(".pc");
+let ComputerCount = document.querySelector(".cc");
+let rlt = document.querySelector(".rst");
+let ccounter = 0;
+let pcounter = 0;
+
+
+buttons.forEach(function (btn) {
+btn.addEventListener("click", () =>{
+ console.log(CheckRound(btn.value)) 
+})});
+
+
+function CheckRound (player){
+  let result = "";
+
+
+const cc = Computer(3);
+const ply = player;
+
+if(cc == ply){
+result = "Unentschieden";
+}else if(cc == "Rock"&& ply == "Scissor"){
+ccounter++;
+}else if(cc == "Scissor"&& ply == "Paper"){
+  ccounter++;
+}else if(cc == "Paper"&& ply == "Rock"){
+  ccounter++;
+}else{
+  pcounter++;
+}
+
+playerCount.textContent = pcounter;
+ComputerCount.textContent = ccounter;
+rlt.textContent = "";
+
+
+if(ccounter === 5){
+
+  rlt.textContent = "Computer Won!";
+  ccounter = 0;
+  pcounter = 0;
+}else if (pcounter === 5 ){
+  rlt.textContent = "Player Won!";
+  ccounter = 0;
+  pcounter = 0;
+}
+
+}
+
+function Computer(randomcount){
+
+let random = Math.floor(Math.random() * randomcount);
+let rtn = "";
+
+
+switch(random){
+
+    case 0:
+    rtn = "Rock";
+    break;
+
+    case 1:
+    rtn = "Paper";
+    break;
+
+    case 2:
+    default:
+    rtn = "Scissor";
+    break;
+
+
+}
+
+return rtn;
+
+}
+
+
+
+
+
+</script>
+
+</body>
+
+</html>
